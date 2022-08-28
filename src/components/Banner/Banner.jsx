@@ -1,8 +1,9 @@
 // import Carousel from "./Carousel";
 import { Container, Typography, styled } from "@mui/material";
+import Carousel from "./Carousel";
 
 const CustomBanner = styled('div')(({ theme }) => ({
-    backgroundImage: "url(./banner2.jpg)",
+    backgroundImage: "url(./banner2.jpeg)",
 }))
 
 const ContainerBanner = styled(Container)(({ theme }) => ({
@@ -37,7 +38,7 @@ function Banner() {
                         style={{
                             fontWeight: "bold",
                             marginBottom: 15,
-                            fontFamily: "Montserrat",
+                            fontFamily: "Roboto",
                         }}
                     >
                         Crypto Watch
@@ -47,13 +48,13 @@ function Banner() {
                         style={{
                             color: "darkgrey",
                             textTransform: "capitalize",
-                            fontFamily: "Montserrat",
+                            fontFamily: "Roboto",
                         }}
                     >
                         Get all the Info regarding your favorite Crypto Currency
                     </Typography>
                 </TagLine>
-                {/* <Carousel /> */}
+                <Carousel />
             </ContainerBanner>
         </CustomBanner>
     );
