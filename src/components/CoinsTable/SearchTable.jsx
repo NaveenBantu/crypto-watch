@@ -1,41 +1,11 @@
-import { createTheme, LinearProgress, Table, TableCell, TableContainer, TableHead, TableBody, TableRow, TablePagination, TextField, ThemeProvider, Typography } from '@mui/material';
-import { Container } from '@mui/system';
-import axios from 'axios';
+import React from 'react'
+import { createTheme, LinearProgress, Table, TableCell, TableContainer, TableHead, TableBody, TableRow, TablePagination, TextField, ThemeProvider, Typography, Container } from '@mui/material';
 import millify from 'millify';
-import React, { useEffect, useState } from 'react'
-import { CoinList } from '../config/api';
-import { CryptoState } from '../CryptoContext';
 
-const CoinsTable = () => {
+const SearchTable = ({ filteredCoins, loading, symbol, handleSearchChange }) => {
     // State for Pagination
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    // States for fetching ,storing and searching data
-    const [coins, setCoins] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState("");
-
-    // Using Context api for currency
-    const { currency, symbol } = CryptoState()
-
-    // Fetching coins
-    const fetchCoins = async () => {
-        setLoading(true);
-        const { data } = await axios.get(CoinList(currency));
-
-        setCoins(data);
-        setLoading(false);
-    }
-
-    // Use effect to fetch the coins
-    useEffect(() => {
-        fetchCoins();
-    }, [])
-
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -55,7 +25,6 @@ const CoinsTable = () => {
         }
     })
 
-    const filteredCoins = coins.filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()))
     return (
         <ThemeProvider theme={darkTheme}>
             <Container>
@@ -67,7 +36,7 @@ const CoinsTable = () => {
                     label="Search for a Crypto Currency"
                     variant='outlined'
                     style={{ marginBottom: 20, width: "100%" }}
-                    onChange={(e) => handleChange(e)} />
+                    onChange={(e) => handleSearchChange(e)} />
 
                 <TableContainer>
                     {
@@ -123,4 +92,4 @@ const CoinsTable = () => {
     )
 }
 
-export default CoinsTable
+export default SearchTable
