@@ -1,6 +1,7 @@
 import React from 'react'
 import { createTheme, LinearProgress, Table, TableCell, TableContainer, TableHead, TableBody, TableRow, TablePagination, TextField, ThemeProvider, Typography, Container } from '@mui/material';
 import millify from 'millify';
+import { Link } from 'react-router-dom';
 
 const SearchTable = ({ filteredCoins, loading, symbol, handleSearchChange }) => {
     // State for Pagination
@@ -63,12 +64,12 @@ const SearchTable = ({ filteredCoins, loading, symbol, handleSearchChange }) => 
                                 <TableBody>
                                     {filteredCoins
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map(({ id, name, current_price, price_change_24h, market_cap }) =>
+                                        .map(({ id, name, current_price, price_change_percentage_24h, market_cap }) =>
                                         (
-                                            <TableRow hover role="checkbox" key={id}>
+                                            <TableRow hover role="checkbox" key={id} component={Link} to={`/coins/${id}`}>
                                                 <TableCell>{name}</TableCell>
                                                 <TableCell>{`${symbol} ${current_price}`}</TableCell>
-                                                <TableCell>{`${price_change_24h}%`}</TableCell>
+                                                <TableCell><span style={{ color: price_change_percentage_24h >= 0 ? '#03DAC5' : 'red' }}>{`${price_change_percentage_24h.toFixed(2)}%`}</span></TableCell>
                                                 <TableCell>{`${symbol} ${millify(market_cap)}`}</TableCell>
                                             </TableRow>
                                         ))

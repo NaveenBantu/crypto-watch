@@ -41,7 +41,7 @@ const Carousel = () => {
                 <img src={coin?.image} alt={coin.name} height="80" style={{ marginBottom: 10 }} />
                 <span>
                     {coin?.symbol}&nbsp;
-                    <span style={{ color: coin_change >= 0 ? 'green' : 'red' }}>
+                    <span style={{ color: coin_change >= 0 ? '#03DAC5' : 'red' }}>
                         {`${coin_change}%`}
                     </span>
                 </span>
