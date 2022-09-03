@@ -1,8 +1,9 @@
-import { CircularProgress, createTheme, styled, ThemeProvider } from '@mui/material';
+import { Button, CircularProgress, createTheme, styled, ThemeProvider } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { HistoricalChart } from '../config/api';
 import { CryptoState } from '../CryptoContext';
+import { chartPeriods } from '../config/data'
 
 import {
     Chart as ChartJS,
@@ -29,12 +30,13 @@ ChartJS.register(
 const CoinChart = ({ id }) => {
     const [historicalData, setHistoricalData] = useState([]);
     const [period, setPeriod] = useState(1);
+    const [flag, setFlag] = useState(false);
 
     const { currency, symbol } = CryptoState();
 
     const fetchChartData = async () => {
         const { data } = await axios.get(HistoricalChart(id, period, currency))
-
+        setFlag(true);
         setHistoricalData(data.prices);
     }
 
@@ -63,11 +65,19 @@ const CoinChart = ({ id }) => {
         padding: 40
     }))
 
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: "#000",
+        backgroundColor: "gold",
+        '&:hover': {
+            backgroundColor: "yellow",
+        },
+    }));
+
     return (
         <ThemeProvider theme={darkTheme}>
             <StyledContainer>
                 {
-                    !historicalData ? (
+                    !historicalData | flag === false ? (
                         <CircularProgress
                             style={{ color: "gold" }}
                             size={250}
@@ -100,6 +110,13 @@ const CoinChart = ({ id }) => {
                                     }
                                 }}
                             />
+                            <div>
+                                {chartPeriods.map((period) => (
+                                    <ColorButton key={period.value} variant="contained" onClick={() => { setPeriod(period.value); setFlag(false) }}>
+                                        {period.label}
+                                    </ColorButton>
+                                ))}
+                            </div>
                         </>
                     )
                 }

@@ -26,8 +26,6 @@ const CoinPage = () => {
         fetchSingleCoin()
     }, []);
 
-    console.log(coin);
-
     const StyledContainer = styled('div')(({ theme }) => ({
         display: "flex",
         [theme.breakpoints.down("md")]: {
