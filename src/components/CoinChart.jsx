@@ -66,6 +66,7 @@ const CoinChart = ({ id }) => {
     }))
 
     const ColorButton = styled(Button)(({ theme }) => ({
+        margin: "10px",
         color: "#000",
         backgroundColor: "gold",
         '&:hover': {
