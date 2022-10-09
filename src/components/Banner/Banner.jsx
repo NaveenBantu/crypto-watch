@@ -2,10 +2,6 @@
 import { Container, Typography, styled } from "@mui/material";
 import Carousel from "./Carousel";
 
-const CustomBanner = styled('div')(({ theme }) => ({
-    backgroundImage: "url(./banner2.jpeg)",
-}))
-
 const ContainerBanner = styled(Container)(({ theme }) => ({
     height: 400,
     display: "flex",
@@ -30,7 +26,6 @@ const TagLine = styled('div')(({ theme }) => ({
 
 function Banner() {
     return (
-        <CustomBanner>
             <ContainerBanner>
                 <TagLine>
                     <Typography
@@ -56,7 +51,6 @@ function Banner() {
                 </TagLine>
                 <Carousel />
             </ContainerBanner>
-        </CustomBanner>
     );
 }
 

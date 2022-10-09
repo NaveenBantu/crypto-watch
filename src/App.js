@@ -7,7 +7,7 @@ import Homepage from './Pages/Homepage';
 
 function App() {
   const CustomApp = styled('div')(({ theme }) => ({
-    backgroundColor: "#14161a",
+    backgroundColor: "#031B34",
     color: "white",
     minHeight: "100vh",
   }))
